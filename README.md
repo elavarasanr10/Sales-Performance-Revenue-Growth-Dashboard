@@ -1,24 +1,46 @@
-# Sales Performance & Revenue Growth Dashboard
+# 📈 Sales Performance & Revenue Growth Dashboard
+
+> **Author / Created By:** ELAVARASAN R
+
+---
+
+![Sales Performance Dashboard Summary](screenshots/salesperformance_dashboard1.png)
+
+---
+
+## 📌 Project Overview
 
 A Power BI dashboard that tracks sales trends, revenue growth, and target achievement across regions, product categories, and sales executives — built to mirror how a sales manager, business analyst, or leadership team monitors performance and decides where to focus next.
 
-## Objective
+---
+
+## 🎯 Objective
 
 To create an interactive Power BI dashboard that tracks sales trends, revenue growth, and product/category performance to help businesses make data-driven decisions. Specifically, to answer:
-1. Are we hitting our sales targets, and by how much?
-2. Which regions, categories, and executives are driving growth — and which are lagging?
-3. How is revenue trending month over month?
-4. Which sales channel and customer type combination performs best?
+1. **Are we hitting our sales targets**, and by how much?
+2. **Which regions, categories, and executives** are driving growth — and which are lagging?
+3. **How is revenue trending** month over month?
+4. **Which sales channel and customer type combination** performs best?
 
-## Tools Used
+---
 
-- **Power BI Desktop** — data modeling, DAX, dashboard build
-- **Power Query** — data cleaning and transformation
-- **Microsoft Excel** — source dataset
-- **DAX (Data Analysis Expressions)** — KPI and measure logic
-- **GitHub** — version control and portfolio hosting
+## 🏭 Industry Relevance
 
-## Dataset Description
+Sales leadership, revenue operations, and finance teams require real-time visibility into sales funnels, profitability margins, and quota achievement to allocate resources effectively and accelerate top-line growth. This project delivers an executive-grade analytics tool designed to track sales momentum and margin health.
+
+---
+
+## 🛠️ Tools Used
+
+- **Power BI Desktop** — Data modeling, DAX, dashboard visual layout design
+- **Power Query** — Data cleaning, ETL transformations, and currency formatting
+- **Microsoft Excel** — Source dataset featuring dynamic threshold and growth formulas
+- **DAX (Data Analysis Expressions)** — Revenue KPIs, target achievement rates, and time-intelligence growth metrics
+- **GitHub** — Version control, portfolio hosting, and project documentation
+
+---
+
+## 📊 Dataset Description
 
 `Sales_Performance_Dataset.xlsx` contains 150 transaction-level rows (Jan 2024 – Dec 2025) with 22 columns:
 
@@ -45,66 +67,53 @@ To create an interactive Power BI dashboard that tracks sales trends, revenue gr
 | Actual Sales | Revenue actually achieved (equals Revenue) |
 | Achievement % | Actual Sales ÷ Target Sales |
 | Growth % | (Revenue − Previous Period Revenue) ÷ Previous Period Revenue |
-| Previous Period Revenue (Reference) | Helper column: a synthetic prior-period revenue baseline used to compute Growth % |
+| Previous Period Revenue | Helper reference column used to compute Growth % |
 
-`Revenue`, `Cost`, `Profit`, `Profit Margin %`, `Target Sales`, `Actual Sales`, `Achievement %`, and `Growth %` are all live Excel formulas, not hardcoded — open the file and click any of those cells to see exactly how each number was derived.
+`Revenue`, `Cost`, `Profit`, `Profit Margin %`, `Target Sales`, `Actual Sales`, `Achievement %`, and `Growth %` are all live Excel formulas, not hardcoded.
 
-A second file, `Raw_Dataset_Before_Cleaning.xlsx`, is the same data before cleanup — it deliberately contains null values, inconsistent text casing, extra whitespace, and duplicate rows for the Power Query cleaning walkthrough.
+A second file, `Raw_Dataset_Before_Cleaning.xlsx`, contains the raw data before cleanup — deliberately containing null values, inconsistent text casing, extra whitespace, and duplicate rows for Power Query ETL walkthroughs.
 
-## Power Query Steps
+---
 
-See [`docs/POWER_QUERY_STEPS.md`](docs/POWER_QUERY_STEPS.md) for the full click-by-click walkthrough. Summary: remove nulls, fix casing, trim whitespace, remove duplicates, correct data types, confirm/derive Month, Quarter, Year, rename columns, and format currency/percentage fields.
+## 🔄 Power Query Steps
 
-## DAX Measures
+See [`docs/POWER_QUERY_STEPS.md`](docs/POWER_QUERY_STEPS.md) for the full click-by-click walkthrough.
+- **Null & Blank Handling:** Removed null records and duplicate transactions.
+- **Text Standardization:** Standardized casing across regions, channels, and product categories.
+- **Data Type Corrections:** Applied explicit locale settings for date parsing (`DD/MM/YYYY`).
+- **Formatting:** Configured standard currency fields and percentage metrics.
 
-See [`docs/DAX_MEASURES.md`](docs/DAX_MEASURES.md) for every measure with its formula and a plain-language explanation. Includes: Total Revenue, Total Cost, Total Profit, Profit Margin %, Total Units Sold, Target Sales, Actual Sales, Achievement %, Growth %, Region-wise Revenue, Category-wise Performance, Sales Executive Performance.
+---
 
-## Dashboard Features
+## 🧮 DAX Measures & Calculations
 
-- **KPI cards:** Revenue, Profit, Units Sold, Achievement %, Growth %
-- **Column chart:** Revenue by Region
-- **Bar chart:** Product Category performance
-- **Line chart:** Monthly Revenue trend
-- **Donut chart:** Sales Channel distribution
-- **Clustered column chart:** Target vs. Actual Sales
-- **Matrix table:** Region × Revenue × Profit × Achievement %
-- **Slicers:** Region, Category, Channel, Sales Executive, Month
-- **Corporate color theme:** blue for neutral metrics, green for profit and over-target performance, red/orange for under-target/low performance
+See [`docs/DAX_MEASURES.md`](docs/DAX_MEASURES.md) for every measure with its formula and plain-language explanation. Key metrics include:
+- **Total Revenue:** `SUM(Sales_Data[Revenue])`
+- **Total Profit:** `SUM(Sales_Data[Profit])`
+- **Profit Margin %:** `DIVIDE([Total Profit], [Total Revenue], 0)`
+- **Achievement %:** `DIVIDE([Total Actual Sales], [Total Target Sales], 0)`
+- **Growth %:** Year-over-year or month-over-month revenue percentage variance.
 
-## Key Insights
+---
 
-*(Fill in with your actual numbers once you build the dashboard — sample structure below)*
+## 🖥️ Dashboard Features & Architecture
 
-- Which region generates the highest revenue vs. which has the highest achievement % (often not the same)
-- Which product category is most profitable, not just highest-revenue
-- Whether the company is hitting sales targets overall, and which regions are dragging the average down
-- The shape of the monthly revenue trend across the two-year window
-- Which sales channel and customer type combination (e.g. Online + New) converts best
-- Which sales executives are consistently over-achieving vs. under-achieving target
+- **Top Executive KPI Cards:** Instant callouts for `Revenue`, `Profit`, `Units Sold`, `Achievement %`, and `Growth %`.
+- **Global Slicer Control Bar:** Cross-filtering across `Region`, `Category`, `Channel`, `Sales Executive`, and `Month`.
+- **Regional & Product Analytics:** Column and bar charts evaluating revenue and profitability across regions and product lines.
+- **Target vs. Actual Performance:** Clustered column chart comparing revenue realization against quotas.
+- **Matrix Regional Performance Grid:** Detailed `Region × Revenue × Profit × Achievement %` breakdown.
 
-## Screenshots
+---
 
-Add dashboard screenshots here after building in Power BI Desktop:
+## 📁 Repository Structure
 
-```
-screenshots/
-  01-full-dashboard.png
-  02-kpi-cards.png
-  03-revenue-by-region.png
-  04-target-vs-actual.png
-  05-monthly-trend.png
-```
-
-`![Dashboard Overview](screenshots/01-full-dashboard.png)`
-
-## Repository Structure
-
-```
+```text
 sales-performance-revenue-growth-dashboard/
 ├── README.md
 ├── Sales_Performance_Dataset.xlsx
 ├── Raw_Dataset_Before_Cleaning.xlsx
-├── Sales-Performance-Revenue-Growth-Dashboard.pbix   (add after building in Power BI Desktop)
+├── Sales-Performance-Revenue-Growth-Dashboard.pbix
 ├── docs/
 │   ├── POWER_QUERY_STEPS.md
 │   ├── DAX_MEASURES.md
@@ -114,9 +123,4 @@ sales-performance-revenue-growth-dashboard/
 │   ├── LINKEDIN_CONTENT.md
 │   └── PROJECT_CHECKLIST.md
 └── screenshots/
-    └── (dashboard images go here)
-```
-
-## Conclusion
-
-This project demonstrates an end-to-end BI workflow: messy raw data → cleaned and modeled data → DAX-driven sales KPIs → a decision-ready dashboard. It reflects the kind of sales performance tool used by sales analysts, business analysts, and revenue managers to track growth and target achievement.
+    └── salesperformance_dashboard1.png
